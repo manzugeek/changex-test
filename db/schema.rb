@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_02_112308) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_07_102835) do
   create_table "applicants", force: :cascade do |t|
     t.string "name"
     t.text "overview"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_112308) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "comment"
     t.index ["name"], name: "index_applicants_on_name", unique: true
     t.index ["project_id"], name: "index_applicants_on_project_id"
   end
@@ -39,6 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_112308) do
     t.date "payment_date"
     t.index ["fund_id"], name: "index_projects_on_fund_id"
     t.index ["title"], name: "index_projects_on_title", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object", limit: 1073741823
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "applicants", "projects"

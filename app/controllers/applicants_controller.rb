@@ -2,7 +2,7 @@
 
 # Controller for CRUD management of Applicants
 class ApplicantsController < ApplicationController
-  before_action :set_applicant, only: %i[show edit update destroy]
+  before_action :set_applicant, only: %i[show edit update destroy versions]
 
   # GET /applicants
   def index
@@ -46,6 +46,10 @@ class ApplicantsController < ApplicationController
     redirect_to applicants_url, notice: 'Applicant was successfully destroyed.'
   end
 
+  def versions
+    @applicants = @applicant.versions
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -55,6 +59,6 @@ class ApplicantsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def applicant_params
-    params.require(:applicant).permit(:name, :overview, :funding, :project_id, :status)
+    params.require(:applicant).permit(:name, :overview, :funding, :project_id, :status, :comment)
   end
 end
