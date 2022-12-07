@@ -13,7 +13,7 @@ RSpec.describe 'applicants/index' do
   let(:project) do
     Project.create!(
       payment_date: Date.current + 1.month,
-      title: 'Project',
+      title: applicant.project.title,
       fund:
     )
   end
