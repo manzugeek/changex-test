@@ -2,6 +2,7 @@
 
 # Applications to Projects
 class Applicant < ApplicationRecord
+  has_paper_trail only: [:status, :comment]
   attribute :status, :integer, default: 0
 
   validates :name, presence: true, uniqueness: true
