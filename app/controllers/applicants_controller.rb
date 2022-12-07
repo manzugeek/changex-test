@@ -2,7 +2,7 @@
 
 # Controller for CRUD management of Applicants
 class ApplicantsController < ApplicationController
-  before_action :set_applicant, only: %i[show edit update destroy]
+  before_action :set_applicant, only: %i[show edit update destroy versions]
 
   # GET /applicants
   def index
@@ -44,6 +44,10 @@ class ApplicantsController < ApplicationController
   def destroy
     @applicant.destroy
     redirect_to applicants_url, notice: 'Applicant was successfully destroyed.'
+  end
+
+  def versions
+    @applicants = @applicant.versions
   end
 
   private
